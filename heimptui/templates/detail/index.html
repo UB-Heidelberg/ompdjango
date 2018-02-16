@@ -1,0 +1,15 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<!{% if submissions_list %}
+    <bootstrap_ul>
+    {% for s in submissions_list %}
+        <li><a href="/heimptui/{{ s.submission_id }}">{{s.submission_id }}</a></li>
+    {% endfor %}
+    </bootstrap_ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
