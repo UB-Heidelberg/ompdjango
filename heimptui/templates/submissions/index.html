@@ -1,0 +1,46 @@
+{% extends '../base.html' %}
+{% block header_navigation %}
+    <li><a href=""> <span class="glyphicon glyphicon-book"></span> Submissions</a></li>
+{% endblock %}
+
+{% block content %}
+
+    {% if sl %}
+
+        <table class="table  table-condensed table-bordered ">
+            <thead>
+            <tr>
+
+                <th>ID</th>
+                <th>Titel</th>
+                <th>Editor</th>
+                <th>Stage</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for s in sl.values %}
+
+                {% if s.title %}
+
+                    <tr>
+
+                        <td scope="row"> {{ s.id }}</td>
+                        <td>{{ s.title }}</td>
+                        <td>{{ s.initials }}</td>
+
+                        <td><a href="workflow/{{ s.id }}/5">Production</a></td>
+                    </tr>
+                {% endif %}
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+
+
+    {% else %}
+        <p>No records available.</p>
+    {% endif %}
+
+{% endblock %}

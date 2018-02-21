@@ -1,0 +1,42 @@
+{% extends '../base.html' %}
+
+{% block header_navigation %}
+    <li><a href=""> <span class="glyphicon glyphicon-home"></span> Press-Verwaltung</a></li>
+{% endblock %}
+{% block content %}
+
+
+
+
+
+{% if presses_list %}
+
+
+        <table class="table table-condensed table-bordered">
+            <thead>
+            <tr>
+
+                <th>ID</th>
+                <th>Press</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in presses_list %}
+                <tr>
+
+                    <td scope="row"> {{ p.press_id }}</td>
+
+                    <td><a href="press/{{ p.press_id }}/submissions">{{ p.path }}</a></td>
+                </tr>
+
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+    {% else %}
+        <p>No presses are available.</p>
+    {% endif %}
+
+{% endblock %}

@@ -803,9 +803,9 @@ class PluginSettings(models.Model):
 
 
 class PressSettings(models.Model):
-    press_id = models.BigIntegerField()
-    locale = models.CharField(max_length=5)
-    setting_name = models.CharField(max_length=255)
+    press_id = models.BigIntegerField(primary_key=True)
+    locale = models.CharField(max_length=5,primary_key=True)
+    setting_name = models.CharField(max_length=255, primary_key=True)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
@@ -1466,17 +1466,6 @@ class SubmissionSearchObjects(models.Model):
         db_table = 'submission_search_objects'
 
 
-class SubmissionSettings(models.Model):
-    submission_id = models.BigIntegerField()
-    locale = models.CharField(max_length=5)
-    setting_name = models.CharField(max_length=255)
-    setting_value = models.TextField(blank=True, null=True)
-    setting_type = models.CharField(max_length=6)
-
-    class Meta:
-        managed = False
-        db_table = 'submission_settings'
-        unique_together = (('submission_id', 'locale', 'setting_name'),)
 
 
 class SubmissionSupplementaryFiles(models.Model):
@@ -1513,6 +1502,18 @@ class Submissions(models.Model):
         managed = False
         db_table = 'submissions'
 
+class SubmissionSettings(models.Model):
+    submission_id = models.BigIntegerField(primary_key=True)
+    #submission_id = models.ForeignKey(Submissions, to_field='submission_id', null=True ,on_delete=False)
+    locale = models.CharField(max_length=5,primary_key=True)
+    setting_name = models.CharField(max_length=255,primary_key=True)
+    setting_value = models.TextField(blank=True, null=True)
+    setting_type = models.CharField(max_length=6)
+
+    class Meta:
+        managed = False
+        db_table = 'submission_settings'
+        unique_together = (('submission_id', 'locale', 'setting_name'),)
 
 class TGeoipCountry(models.Model):
     ip_begin = models.CharField(unique=True, max_length=15)
@@ -1775,3 +1776,4 @@ class Versions(models.Model):
         managed = False
         db_table = 'versions'
         unique_together = (('product_type', 'product', 'major', 'minor', 'revision', 'build'),)
+
