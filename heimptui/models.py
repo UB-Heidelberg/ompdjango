@@ -87,9 +87,8 @@ class AuthSources(models.Model):
         managed = False
         db_table = 'auth_sources'
 
-
 class AuthorSettings(models.Model):
-    author_id = models.BigIntegerField()
+    author_id = models.BigIntegerField(primary_key=True)
     locale = models.CharField(max_length=5)
     setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
