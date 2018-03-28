@@ -30,7 +30,7 @@ class OMPDAL:
         return SubmissionChapters.objects.filter(submission_id=submission_id).order_by('chapter_seq')
 
     def getChapterSettings(self, chapter_id):
-        return SubmissionChapterSettings.objects.filter(chapter_id=chapter_id,locale=locale)
+        return SubmissionChapterSettings.objects.filter(chapter_id=chapter_id, locale=locale)
 
     def getDigitalPublicationFormats(self, submission_id):
         return PublicationFormats.objects.filter(submission_id=submission_id, physical_format=False)
@@ -68,7 +68,13 @@ class OMPDAL:
     def getLatestRevisionOfChapterFileByPublicationFormat(self, chapter_id, publication_format_id):
         return SubmissionFiles.objects.filter(
             file_id__in=omp.getChapterFileSettings(chapter_id).values('file_id')
-        ).filter(assoc_id = publication_format_id).order_by('revision').first()
+        ).filter(assoc_id=publication_format_id).order_by('revision').first()
+
+    def getFileNameByFileID(self, file):
+        if file:
+            return '{}-{}-{}-{}-{}-{}.{}'.format(file.submission_id, file.genre_id, file.file_id, file.revision, file.file_stage, file.date_uploaded.strftime('%Y%M%d'),
+             file.original_file_name.split(".")[-1])
+        else: return []
 
 
 omp = OMPDAL()
@@ -127,14 +133,16 @@ def workflow(request, press_id, submission_id, stage_id):
         chapters[chapter_id] = {}
         chapters[chapter.chapter_id]['settings'] = omp.getChapterSettings(chapter.chapter_id)
 
-        chapters[chapter.chapter_id]['authors'] = [omp.getAuthor(author.author_id) for author in omp.getAuthorsByChapter(chapter.chapter_id)]
-        pfs = [omp.getLatestRevisionOfChapterFileByPublicationFormat(chapter_id, int(format_id[0])) for
+        chapters[chapter.chapter_id]['authors'] = [omp.getAuthor(author.author_id) for author in
+                                                   omp.getAuthorsByChapter(chapter.chapter_id)]
+        pfs = [omp.getFileNameByFileID(
+            omp.getLatestRevisionOfChapterFileByPublicationFormat(chapter_id, int(format_id[0]))) for
                format_id in
                omp.getAllPublicationFormatsBySubmission(submission_id=submission_id).values_list(
                    'publication_format_id')]
         chapters[chapter_id]['files'] = pfs
 
-    context = {'chapters': chapters,'formats':formats, 'press_title': ''}
+    context = {'chapters': chapters, 'formats': formats, 'press_title': ''}
 
     return render(request, 'workflow/index.html', context)
 
