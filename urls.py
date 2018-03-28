@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import include,path
 from heimptui import  views
 
+
 urlpatterns = [
     path('heimptui/', include('heimptui.urls')),
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
+
 ]

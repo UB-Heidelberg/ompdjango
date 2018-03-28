@@ -1,0 +1,48 @@
+{% extends '../base.html' %}
+{% block header_navigation %}
+     <li><a href="#">{{ press_title }}</a></li>
+{% endblock %}
+
+{% block content %}
+{{ results }}
+         {% for s in sl.values %}
+        {{ s }}
+        {% endfor %}
+    {% if sl %}
+
+        <table class="table table-bordered ">
+            <thead>
+            <tr>
+
+                <th>ID</th>
+                <th>Titel</th>
+                <th>Editor</th>
+                <th>Stage</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for s in sl.values %}
+
+                {% if s.title %}
+
+                    <tr>
+                        <td scope="row">{{ s.id }}</td>
+                        <td>{{ s.title }}</td>
+                        <td>{{ s.initials }}</td>
+
+                        <td><a href="press/{{ press_id }}/workflow/{{ s.id }}/5">Production</a></td>
+                    </tr>
+                {% endif %}
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+
+
+    {% else %}
+        <p>No records available.</p>
+    {% endif %}
+
+{% endblock %}

@@ -8,6 +8,12 @@
 from django.db import models
 
 
+class OMPManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset().filter(setting_name=kwargs.get("setting_name")).filter(
+            locale=kwargs.get("locale"))
+
+
 class AccessKeys(models.Model):
     access_key_id = models.BigAutoField(primary_key=True)
     context = models.CharField(max_length=40)
@@ -89,6 +95,8 @@ class AuthorSettings(models.Model):
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
+    setting_by_name = OMPManager()
+
     class Meta:
         managed = False
         db_table = 'author_settings'
@@ -121,6 +129,8 @@ class CataloguingMetadataFieldSettings(models.Model):
     setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
@@ -159,6 +169,8 @@ class CategorySettings(models.Model):
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
+    setting_by_name = OMPManager()
+
     class Meta:
         managed = False
         db_table = 'category_settings'
@@ -171,6 +183,8 @@ class CitationSettings(models.Model):
     setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
@@ -401,6 +415,8 @@ class EventLogSettings(models.Model):
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
+    setting_by_name = OMPManager()
+
     class Meta:
         managed = False
         db_table = 'event_log_settings'
@@ -438,6 +454,8 @@ class FilterSettings(models.Model):
     setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
@@ -566,6 +584,8 @@ class LibraryFileSettings(models.Model):
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
+    setting_by_name = OMPManager()
+
     class Meta:
         managed = False
         db_table = 'library_file_settings'
@@ -619,6 +639,8 @@ class MetadataDescriptionSettings(models.Model):
     setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
@@ -718,6 +740,8 @@ class NotificationSettings(models.Model):
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
+    setting_by_name = OMPManager()
+
     class Meta:
         managed = False
         db_table = 'notification_settings'
@@ -804,10 +828,12 @@ class PluginSettings(models.Model):
 
 class PressSettings(models.Model):
     press_id = models.BigIntegerField(primary_key=True)
-    locale = models.CharField(max_length=5,primary_key=True)
+    locale = models.CharField(max_length=5, primary_key=True)
     setting_name = models.CharField(max_length=255, primary_key=True)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
@@ -852,11 +878,13 @@ class PublicationDates(models.Model):
 
 
 class PublicationFormatSettings(models.Model):
-    publication_format_id = models.BigIntegerField()
-    locale = models.CharField(max_length=5)
-    setting_name = models.CharField(max_length=255)
+    publication_format_id = models.BigIntegerField(primary_key=True)
+    locale = models.CharField(max_length=5, primary_key=True)
+    setting_name = models.CharField(max_length=255, primary_key=True)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
@@ -1019,6 +1047,8 @@ class ReviewFormElementSettings(models.Model):
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
+    setting_by_name = OMPManager()
+
     class Meta:
         managed = False
         db_table = 'review_form_element_settings'
@@ -1055,6 +1085,8 @@ class ReviewFormSettings(models.Model):
     setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
@@ -1223,6 +1255,8 @@ class SiteSettings(models.Model):
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
+    setting_by_name = OMPManager()
+
     class Meta:
         managed = False
         db_table = 'site_settings'
@@ -1259,6 +1293,8 @@ class SpotlightSettings(models.Model):
     setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
@@ -1342,7 +1378,7 @@ class SubmissionCategories(models.Model):
 
 
 class SubmissionChapterAuthors(models.Model):
-    author_id = models.BigIntegerField()
+    author_id = models.BigIntegerField(primary_key=True)
     chapter_id = models.BigIntegerField()
     submission_id = models.BigIntegerField()
     primary_contact = models.IntegerField()
@@ -1355,7 +1391,7 @@ class SubmissionChapterAuthors(models.Model):
 
 
 class SubmissionChapterSettings(models.Model):
-    chapter_id = models.BigIntegerField()
+    chapter_id = models.BigIntegerField(primary_key=True)
     locale = models.CharField(max_length=5)
     setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
@@ -1395,22 +1431,9 @@ class SubmissionComments(models.Model):
         db_table = 'submission_comments'
 
 
-class SubmissionFileSettings(models.Model):
-    file_id = models.BigIntegerField()
-    locale = models.CharField(max_length=5)
-    setting_name = models.CharField(max_length=255)
-    setting_value = models.TextField(blank=True, null=True)
-    setting_type = models.CharField(max_length=6)
-
-    class Meta:
-        managed = False
-        db_table = 'submission_file_settings'
-        unique_together = (('file_id', 'locale', 'setting_name'),)
-
-
 class SubmissionFiles(models.Model):
     file_id = models.BigAutoField(primary_key=True)
-    revision = models.BigIntegerField()
+    revision = models.BigIntegerField(primary_key=True)
     source_file_id = models.BigIntegerField(blank=True, null=True)
     source_revision = models.BigIntegerField(blank=True, null=True)
     submission_id = models.BigIntegerField()
@@ -1432,7 +1455,21 @@ class SubmissionFiles(models.Model):
     class Meta:
         managed = False
         db_table = 'submission_files'
-        unique_together = (('file_id', 'revision'),)
+        unique_together = (('file_id', 'revision'))
+
+
+class SubmissionFileSettings(models.Model):
+    file_id = models.BigIntegerField(primary_key=True)
+    #file_id = models.ForeignKey(SubmissionFiles, on_delete=False, related_name='file_id+', primary_key=True)
+    locale = models.CharField(max_length=5, primary_key=True)
+    setting_name = models.CharField(max_length=255, primary_key=True)
+    setting_value = models.TextField(blank=True, null=True)
+    setting_type = models.CharField(max_length=6)
+
+    class Meta:
+        managed = False
+        db_table = 'submission_file_settings'
+        unique_together = (('file_id', 'locale', 'setting_name'))
 
 
 class SubmissionSearchKeywordList(models.Model):
@@ -1464,8 +1501,6 @@ class SubmissionSearchObjects(models.Model):
     class Meta:
         managed = False
         db_table = 'submission_search_objects'
-
-
 
 
 class SubmissionSupplementaryFiles(models.Model):
@@ -1502,18 +1537,22 @@ class Submissions(models.Model):
         managed = False
         db_table = 'submissions'
 
+
 class SubmissionSettings(models.Model):
     submission_id = models.BigIntegerField(primary_key=True)
-    #submission_id = models.ForeignKey(Submissions, to_field='submission_id', null=True ,on_delete=False)
-    locale = models.CharField(max_length=5,primary_key=True)
-    setting_name = models.CharField(max_length=255,primary_key=True)
+    locale = models.CharField(max_length=5, primary_key=True)
+    setting_name = models.CharField(max_length=255, primary_key=True)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
+
+    objects = models.Manager()
+    setting_by_name = OMPManager()
 
     class Meta:
         managed = False
         db_table = 'submission_settings'
         unique_together = (('submission_id', 'locale', 'setting_name'),)
+
 
 class TGeoipCountry(models.Model):
     ip_begin = models.CharField(unique=True, max_length=15)
@@ -1557,7 +1596,8 @@ class TKnvMetadata(models.Model):
     papiertyp = models.CharField(max_length=512, blank=True, null=True)
     laminierungsart = models.CharField(max_length=512, blank=True, null=True)
     barcode_position = models.CharField(max_length=512, blank=True, null=True)
-    dateiname_pdf_innerwork_field = models.CharField(db_column='dateiname_pdf_innerwork_', max_length=512, blank=True, null=True)  # Field renamed because it ended with '_'.
+    dateiname_pdf_innerwork_field = models.CharField(db_column='dateiname_pdf_innerwork_', max_length=512, blank=True,
+                                                     null=True)  # Field renamed because it ended with '_'.
     farbraum = models.CharField(max_length=512, blank=True, null=True)
     anzahl_farbseiten = models.IntegerField(blank=True, null=True)
     breite_der_trimbox = models.IntegerField(blank=True, null=True)
@@ -1701,18 +1741,20 @@ class UserInterests(models.Model):
 
 
 class UserSettings(models.Model):
-    user_id = models.BigIntegerField()
-    locale = models.CharField(max_length=5)
-    setting_name = models.CharField(max_length=255)
+    user_id = models.BigIntegerField(primary_key=True)
+    locale = models.CharField(max_length=5, primary_key=True)
+    setting_name = models.CharField(max_length=255, primary_key=True)
     assoc_type = models.BigIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField(blank=True, null=True)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
+    setting_by_name = OMPManager()
+
     class Meta:
         managed = False
         db_table = 'user_settings'
-        unique_together = (('user_id', 'locale', 'setting_name', 'assoc_type', 'assoc_id'),)
+        unique_together = (('user_id', 'locale', 'setting_name'))
 
 
 class UserUserGroups(models.Model):
@@ -1776,4 +1818,3 @@ class Versions(models.Model):
         managed = False
         db_table = 'versions'
         unique_together = (('product_type', 'product', 'major', 'minor', 'revision', 'build'),)
-
