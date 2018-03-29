@@ -4,47 +4,49 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-condensed table-bordered">
-            <thead>
+    <div id="workflow">
+    <greeting message="Monograph management"></greeting>
+        <table class="table table-condensed table-bordered">
+                <thead>
 
-                <tr>
-                    <td></td>
-                    {% for v in formats %}
-                       <td>
-                       {{ v}}
-                       </td>
-                    {% endfor %}
-
-                </tr>
-            </thead>
-
-
-         {% for k in chapters.values %}
-             <tr>
-                <td>
-                   {% for s in k.settings %}
-                   {{ s.setting_value}}
-                   {% endfor %}
-                <br/>
-                  <div class="chapter_author">
-                  {% for au in k.authors %}
-                        {% for s in au %}
-
-                              {{ s.first_name}}
-                              {{ s.last_name}}  &nbsp;
-                          {% endfor %}
+                    <tr>
+                        <td></td>
+                        {% for v in formats %}
+                           <td>
+                           {{ v}}
+                           </td>
                         {% endfor %}
-                  </div>
-                </td>
-                 {%  for f in k.files %}
+
+                    </tr>
+                </thead>
+
+
+             {% for k in chapters.values %}
+                 <tr>
                     <td>
-                    {{ f }}
+                       {% for s in k.settings %}
+                       {{ s.setting_value}}
+                       {% endfor %}
+                    <br/>
+                      <div class="chapter_author">
+                      {% for au in k.authors %}
+                            {% for s in au %}
+
+                                  {{ s.first_name}}
+                                  {{ s.last_name}}  &nbsp;
+                              {% endfor %}
+                            {% endfor %}
+                      </div>
                     </td>
-                 {% endfor %}
+                     {%  for f in k.files %}
+                        <td>
+                        {{ f }}
+                        </td>
+                     {% endfor %}
 
-             </tr>
+                 </tr>
 
-        {% endfor %}
-</table>
-
+            {% endfor %}
+    </table>
+</div>
 {% endblock %}
