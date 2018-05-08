@@ -1,6 +1,8 @@
-import numpy as np
+import os
+
 from collections import OrderedDict
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
@@ -72,9 +74,11 @@ class OMPDAL:
 
     def getFileNameByFileID(self, file):
         if file:
-            return '{}-{}-{}-{}-{}-{}.{}'.format(file.submission_id, file.genre_id, file.file_id, file.revision, file.file_stage, file.date_uploaded.strftime('%Y%M%d'),
+            return '{}-{}-{}-{}-{}-{}.{}'.format(file.submission_id, file.genre_id, file.file_id, file.revision, file.file_stage, file.date_uploaded.strftime('%Y%m%d'),
              file.original_file_name.split(".")[-1])
-        else: return []
+        else: return None
+
+
 
 
 omp = OMPDAL()
@@ -142,9 +146,19 @@ def workflow(request, press_id, submission_id, stage_id):
                    'publication_format_id')]
         chapters[chapter_id]['files'] = pfs
 
-    context = {'chapters': chapters, 'formats': formats, 'press_title': ''}
+    context = {'chapters': chapters, 'formats': formats, 'press_title': '','press_id':press_id, 'submission_id':submission_id}
 
     return render(request, 'workflow/index.html', context)
+
+
+
+def download(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
 
 
 class PressesView(ListView):

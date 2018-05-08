@@ -1,4 +1,6 @@
 {% extends '../base.html' %}
+{% load static %}
+{% static "" as staticUrl %}
 {% block header_navigation %}
      <li><a href="#">{{ press_title }}</a></li>
 {% endblock %}
@@ -38,9 +40,13 @@
                             {% endfor %}
                       </div>
                     </td>
-                     {%  for f in k.files %}
+                     {%  for file in k.files %}
                         <td>
-                        {{ f }}
+                            {% if file %}
+                            <a href="{% static "" %}files/presses/{{ press_id}}/monographs/{{submission_id}}/submission/proof/{{ file }}"><i class="glyphicon glyphicon-book"></i></a>
+                            {% endif %}
+
+
                         </td>
                      {% endfor %}
 
@@ -50,3 +56,4 @@
     </table>
 </div>
 {% endblock %}
+

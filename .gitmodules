@@ -1,0 +1,3 @@
+[submodule "tools/heimpt"]
+	path = tools/heimpt
+	url = https://github.com/withanage/heimpt

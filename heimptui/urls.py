@@ -3,11 +3,14 @@
 # Created by wit at 15.02.18
 
 from django.urls import path
-from django.conf.urls import  url
+from django.conf import settings
+from django.urls import re_path
+from django.conf.urls import url
 from django.views import static
 
+
 from heimptui import views
-from  heimptui.views import  PressesView
+from heimptui.views import PressesView
 
 urlpatterns = [
     # heimptui
@@ -19,7 +22,9 @@ urlpatterns = [
     path('press/<int:press_id>/submissions', views.submissions, name='submissions'),
     path('press/<int:press_id>/workflow/<int:submission_id>/<int:stage_id>', views.workflow, name='workflow'),
     # heimptui/details/1
-    path('<int:submission_id>',  views.detail, name='press')
+    path('<int:submission_id>', views.detail, name='press')
     # heimptui/
+
+
 
 ]
