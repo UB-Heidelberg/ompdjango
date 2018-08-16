@@ -15,7 +15,7 @@ class OMPManager(models.Manager):
 
 
 class AccessKeys(models.Model):
-    access_key_id = models.BigAutoField(primary_key=True)
+    access_key_id = models.BigIntegerField(primary_key=True)
     context = models.CharField(max_length=40)
     key_hash = models.CharField(max_length=40)
     user_id = models.BigIntegerField()
@@ -54,7 +54,7 @@ class AnnouncementTypeSettings(models.Model):
 
 
 class AnnouncementTypes(models.Model):
-    type_id = models.BigAutoField(primary_key=True)
+    type_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.SmallIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField()
 
@@ -64,7 +64,7 @@ class AnnouncementTypes(models.Model):
 
 
 class Announcements(models.Model):
-    announcement_id = models.BigAutoField(primary_key=True)
+    announcement_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.SmallIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField()
     type_id = models.BigIntegerField(blank=True, null=True)
@@ -77,7 +77,7 @@ class Announcements(models.Model):
 
 
 class AuthSources(models.Model):
-    auth_id = models.BigAutoField(primary_key=True)
+    auth_id = models.BigIntegerField(primary_key=True)
     title = models.CharField(max_length=60)
     plugin = models.CharField(max_length=32)
     auth_default = models.IntegerField()
@@ -103,7 +103,7 @@ class AuthorSettings(models.Model):
 
 
 class Authors(models.Model):
-    author_id = models.BigAutoField(primary_key=True)
+    author_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     primary_contact = models.IntegerField()
     seq = models.FloatField()
@@ -138,7 +138,7 @@ class CataloguingMetadataFieldSettings(models.Model):
 
 
 class CataloguingMetadataFields(models.Model):
-    field_id = models.BigAutoField(primary_key=True)
+    field_id = models.BigIntegerField(primary_key=True)
     press_id = models.BigIntegerField()
     enabled = models.IntegerField()
 
@@ -148,7 +148,7 @@ class CataloguingMetadataFields(models.Model):
 
 
 class Categories(models.Model):
-    category_id = models.BigAutoField(primary_key=True)
+    category_id = models.BigIntegerField(primary_key=True)
     press_id = models.BigIntegerField()
     parent_id = models.BigIntegerField()
     path = models.CharField(max_length=255)
@@ -192,7 +192,7 @@ class CitationSettings(models.Model):
 
 
 class Citations(models.Model):
-    citation_id = models.BigAutoField(primary_key=True)
+    citation_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.BigIntegerField()
     assoc_id = models.BigIntegerField()
     citation_state = models.BigIntegerField()
@@ -207,7 +207,7 @@ class Citations(models.Model):
 
 
 class CompletedPayments(models.Model):
-    completed_payment_id = models.BigAutoField(primary_key=True)
+    completed_payment_id = models.BigIntegerField(primary_key=True)
     timestamp = models.DateTimeField()
     payment_type = models.BigIntegerField()
     press_id = models.BigIntegerField()
@@ -223,7 +223,7 @@ class CompletedPayments(models.Model):
 
 
 class ControlledVocabEntries(models.Model):
-    controlled_vocab_entry_id = models.BigAutoField(primary_key=True)
+    controlled_vocab_entry_id = models.BigIntegerField(primary_key=True)
     controlled_vocab_id = models.BigIntegerField()
     seq = models.FloatField(blank=True, null=True)
 
@@ -246,7 +246,7 @@ class ControlledVocabEntrySettings(models.Model):
 
 
 class ControlledVocabs(models.Model):
-    controlled_vocab_id = models.BigAutoField(primary_key=True)
+    controlled_vocab_id = models.BigIntegerField(primary_key=True)
     symbolic = models.CharField(max_length=64)
     assoc_type = models.BigIntegerField()
     assoc_id = models.BigIntegerField()
@@ -258,7 +258,7 @@ class ControlledVocabs(models.Model):
 
 
 class DataObjectTombstoneOaiSetObjects(models.Model):
-    object_id = models.BigAutoField(primary_key=True)
+    object_id = models.BigIntegerField(primary_key=True)
     tombstone_id = models.BigIntegerField()
     assoc_type = models.BigIntegerField()
     assoc_id = models.BigIntegerField()
@@ -282,7 +282,7 @@ class DataObjectTombstoneSettings(models.Model):
 
 
 class DataObjectTombstones(models.Model):
-    tombstone_id = models.BigAutoField(primary_key=True)
+    tombstone_id = models.BigIntegerField(primary_key=True)
     data_object_id = models.BigIntegerField()
     date_deleted = models.DateTimeField()
     set_spec = models.CharField(max_length=255)
@@ -295,7 +295,7 @@ class DataObjectTombstones(models.Model):
 
 
 class EditDecisions(models.Model):
-    edit_decision_id = models.BigAutoField(primary_key=True)
+    edit_decision_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     review_round_id = models.BigIntegerField()
     stage_id = models.BigIntegerField(blank=True, null=True)
@@ -310,7 +310,7 @@ class EditDecisions(models.Model):
 
 
 class EmailLog(models.Model):
-    log_id = models.BigAutoField(primary_key=True)
+    log_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.BigIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField(blank=True, null=True)
     sender_id = models.BigIntegerField()
@@ -340,7 +340,7 @@ class EmailLogUsers(models.Model):
 
 
 class EmailTemplates(models.Model):
-    email_id = models.BigAutoField(primary_key=True)
+    email_id = models.BigIntegerField(primary_key=True)
     email_key = models.CharField(max_length=64)
     assoc_type = models.BigIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField(blank=True, null=True)
@@ -367,7 +367,7 @@ class EmailTemplatesData(models.Model):
 
 
 class EmailTemplatesDefault(models.Model):
-    email_id = models.BigAutoField(primary_key=True)
+    email_id = models.BigIntegerField(primary_key=True)
     email_key = models.CharField(max_length=64)
     can_disable = models.IntegerField()
     can_edit = models.IntegerField()
@@ -393,7 +393,7 @@ class EmailTemplatesDefaultData(models.Model):
 
 
 class EventLog(models.Model):
-    log_id = models.BigAutoField(primary_key=True)
+    log_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.BigIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField(blank=True, null=True)
     user_id = models.BigIntegerField()
@@ -435,7 +435,7 @@ class Features(models.Model):
 
 
 class FilterGroups(models.Model):
-    filter_group_id = models.BigAutoField(primary_key=True)
+    filter_group_id = models.BigIntegerField(primary_key=True)
     symbolic = models.CharField(unique=True, max_length=255, blank=True, null=True)
     display_name = models.CharField(max_length=255, blank=True, null=True)
     description = models.CharField(max_length=255, blank=True, null=True)
@@ -463,7 +463,7 @@ class FilterSettings(models.Model):
 
 
 class Filters(models.Model):
-    filter_id = models.BigAutoField(primary_key=True)
+    filter_id = models.BigIntegerField(primary_key=True)
     filter_group_id = models.BigIntegerField()
     context_id = models.BigIntegerField()
     display_name = models.CharField(max_length=255, blank=True, null=True)
@@ -478,7 +478,7 @@ class Filters(models.Model):
 
 
 class FooterCategories(models.Model):
-    footer_category_id = models.BigAutoField(primary_key=True)
+    footer_category_id = models.BigIntegerField(primary_key=True)
     context_id = models.BigIntegerField()
     path = models.CharField(max_length=255)
 
@@ -515,7 +515,7 @@ class FooterlinkSettings(models.Model):
 
 
 class Footerlinks(models.Model):
-    footerlink_id = models.BigAutoField(primary_key=True)
+    footerlink_id = models.BigIntegerField(primary_key=True)
     context_id = models.BigIntegerField()
     footer_category_id = models.BigIntegerField()
 
@@ -538,7 +538,7 @@ class GenreSettings(models.Model):
 
 
 class Genres(models.Model):
-    genre_id = models.BigAutoField(primary_key=True)
+    genre_id = models.BigIntegerField(primary_key=True)
     context_id = models.BigIntegerField()
     seq = models.BigIntegerField(blank=True, null=True)
     sortable = models.IntegerField()
@@ -554,7 +554,7 @@ class Genres(models.Model):
 
 
 class IdentificationCodes(models.Model):
-    identification_code_id = models.BigAutoField(primary_key=True)
+    identification_code_id = models.BigIntegerField(primary_key=True)
     publication_format_id = models.BigIntegerField()
     code = models.CharField(max_length=40)
     value = models.CharField(max_length=255)
@@ -592,7 +592,7 @@ class LibraryFileSettings(models.Model):
 
 
 class LibraryFiles(models.Model):
-    file_id = models.BigAutoField(primary_key=True)
+    file_id = models.BigIntegerField(primary_key=True)
     context_id = models.BigIntegerField()
     file_name = models.CharField(max_length=255)
     original_file_name = models.CharField(max_length=255)
@@ -609,7 +609,7 @@ class LibraryFiles(models.Model):
 
 
 class Markets(models.Model):
-    market_id = models.BigAutoField(primary_key=True)
+    market_id = models.BigIntegerField(primary_key=True)
     publication_format_id = models.BigIntegerField()
     countries_included = models.TextField(blank=True, null=True)
     countries_excluded = models.TextField(blank=True, null=True)
@@ -648,7 +648,7 @@ class MetadataDescriptionSettings(models.Model):
 
 
 class MetadataDescriptions(models.Model):
-    metadata_description_id = models.BigAutoField(primary_key=True)
+    metadata_description_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.BigIntegerField()
     assoc_id = models.BigIntegerField()
     schema_namespace = models.CharField(max_length=255)
@@ -705,7 +705,7 @@ class NewReleases(models.Model):
 
 
 class Notes(models.Model):
-    note_id = models.BigAutoField(primary_key=True)
+    note_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.BigIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField(blank=True, null=True)
     user_id = models.BigIntegerField()
@@ -720,7 +720,7 @@ class Notes(models.Model):
 
 
 class NotificationMailList(models.Model):
-    notification_mail_list_id = models.BigAutoField(primary_key=True)
+    notification_mail_list_id = models.BigIntegerField(primary_key=True)
     email = models.CharField(max_length=90)
     confirmed = models.IntegerField()
     token = models.CharField(max_length=40)
@@ -758,7 +758,7 @@ class NotificationStatus(models.Model):
 
 
 class NotificationSubscriptionSettings(models.Model):
-    setting_id = models.BigAutoField(primary_key=True)
+    setting_id = models.BigIntegerField(primary_key=True)
     setting_name = models.CharField(max_length=64)
     setting_value = models.TextField(blank=True, null=True)
     user_id = models.BigIntegerField()
@@ -771,7 +771,7 @@ class NotificationSubscriptionSettings(models.Model):
 
 
 class Notifications(models.Model):
-    notification_id = models.BigAutoField(primary_key=True)
+    notification_id = models.BigIntegerField(primary_key=True)
     context_id = models.BigIntegerField()
     user_id = models.BigIntegerField(blank=True, null=True)
     level = models.BigIntegerField()
@@ -841,7 +841,7 @@ class PressSettings(models.Model):
 
 
 class Presses(models.Model):
-    press_id = models.BigAutoField(primary_key=True)
+    press_id = models.BigIntegerField(primary_key=True)
     path = models.CharField(unique=True, max_length=32)
     seq = models.FloatField()
     primary_locale = models.CharField(max_length=5)
@@ -865,7 +865,7 @@ class Processes(models.Model):
 
 
 class PublicationDates(models.Model):
-    publication_date_id = models.BigAutoField(primary_key=True)
+    publication_date_id = models.BigIntegerField(primary_key=True)
     publication_format_id = models.BigIntegerField()
     role = models.CharField(max_length=40)
     date_format = models.CharField(max_length=40)
@@ -892,7 +892,7 @@ class PublicationFormatSettings(models.Model):
 
 
 class PublicationFormats(models.Model):
-    publication_format_id = models.BigAutoField(primary_key=True)
+    publication_format_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     physical_format = models.IntegerField(blank=True, null=True)
     entry_key = models.CharField(max_length=64, blank=True, null=True)
@@ -925,7 +925,7 @@ class PublicationFormats(models.Model):
 
 
 class PublishedSubmissions(models.Model):
-    pub_id = models.BigAutoField(primary_key=True)
+    pub_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField(unique=True)
     date_published = models.DateTimeField(blank=True, null=True)
     audience = models.CharField(max_length=255, blank=True, null=True)
@@ -941,7 +941,7 @@ class PublishedSubmissions(models.Model):
 
 
 class Queries(models.Model):
-    query_id = models.BigAutoField(primary_key=True)
+    query_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.BigIntegerField()
     assoc_id = models.BigIntegerField()
     stage_id = models.IntegerField()
@@ -966,7 +966,7 @@ class QueryParticipants(models.Model):
 
 
 class QueuedPayments(models.Model):
-    queued_payment_id = models.BigAutoField(primary_key=True)
+    queued_payment_id = models.BigIntegerField(primary_key=True)
     date_created = models.DateTimeField()
     date_modified = models.DateTimeField()
     expiry_date = models.DateField(blank=True, null=True)
@@ -978,7 +978,7 @@ class QueuedPayments(models.Model):
 
 
 class Representatives(models.Model):
-    representative_id = models.BigAutoField(primary_key=True)
+    representative_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     role = models.CharField(max_length=40)
     representative_id_type = models.CharField(max_length=255, blank=True, null=True)
@@ -995,7 +995,7 @@ class Representatives(models.Model):
 
 
 class ReviewAssignments(models.Model):
-    review_id = models.BigAutoField(primary_key=True)
+    review_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     reviewer_id = models.BigIntegerField()
     competing_interests = models.TextField(blank=True, null=True)
@@ -1055,7 +1055,7 @@ class ReviewFormElementSettings(models.Model):
 
 
 class ReviewFormElements(models.Model):
-    review_form_element_id = models.BigAutoField(primary_key=True)
+    review_form_element_id = models.BigIntegerField(primary_key=True)
     review_form_id = models.BigIntegerField()
     seq = models.FloatField(blank=True, null=True)
     element_type = models.BigIntegerField(blank=True, null=True)
@@ -1094,7 +1094,7 @@ class ReviewFormSettings(models.Model):
 
 
 class ReviewForms(models.Model):
-    review_form_id = models.BigAutoField(primary_key=True)
+    review_form_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.BigIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField(blank=True, null=True)
     seq = models.FloatField(blank=True, null=True)
@@ -1119,7 +1119,7 @@ class ReviewRoundFiles(models.Model):
 
 
 class ReviewRounds(models.Model):
-    review_round_id = models.BigAutoField(primary_key=True)
+    review_round_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     stage_id = models.BigIntegerField(blank=True, null=True)
     round = models.IntegerField()
@@ -1133,7 +1133,7 @@ class ReviewRounds(models.Model):
 
 
 class SalesRights(models.Model):
-    sales_rights_id = models.BigAutoField(primary_key=True)
+    sales_rights_id = models.BigIntegerField(primary_key=True)
     publication_format_id = models.BigIntegerField()
     type = models.CharField(max_length=40)
     row_setting = models.IntegerField()
@@ -1168,7 +1168,7 @@ class SectionEditors(models.Model):
 
 
 class Series(models.Model):
-    series_id = models.BigAutoField(primary_key=True)
+    series_id = models.BigIntegerField(primary_key=True)
     press_id = models.BigIntegerField()
     seq = models.FloatField(blank=True, null=True)
     featured = models.IntegerField()
@@ -1263,7 +1263,7 @@ class SiteSettings(models.Model):
 
 
 class SocialMedia(models.Model):
-    social_media_id = models.BigAutoField(primary_key=True)
+    social_media_id = models.BigIntegerField(primary_key=True)
     context_id = models.BigIntegerField()
     code = models.TextField(blank=True, null=True)
     include_in_catalog = models.SmallIntegerField(blank=True, null=True)
@@ -1302,7 +1302,7 @@ class SpotlightSettings(models.Model):
 
 
 class Spotlights(models.Model):
-    spotlight_id = models.BigAutoField(primary_key=True)
+    spotlight_id = models.BigIntegerField(primary_key=True)
     assoc_type = models.SmallIntegerField()
     assoc_id = models.SmallIntegerField()
     press_id = models.BigIntegerField()
@@ -1313,7 +1313,7 @@ class Spotlights(models.Model):
 
 
 class StageAssignments(models.Model):
-    stage_assignment_id = models.BigAutoField(primary_key=True)
+    stage_assignment_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     user_group_id = models.BigIntegerField()
     user_id = models.BigIntegerField()
@@ -1339,7 +1339,7 @@ class StaticPageSettings(models.Model):
 
 
 class StaticPages(models.Model):
-    static_page_id = models.BigAutoField(primary_key=True)
+    static_page_id = models.BigIntegerField(primary_key=True)
     path = models.CharField(max_length=255)
     context_id = models.BigIntegerField()
 
@@ -1403,7 +1403,7 @@ class SubmissionChapterSettings(models.Model):
 
 
 class SubmissionChapters(models.Model):
-    chapter_id = models.BigAutoField(primary_key=True)
+    chapter_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     chapter_seq = models.FloatField()
 
@@ -1413,7 +1413,7 @@ class SubmissionChapters(models.Model):
 
 
 class SubmissionComments(models.Model):
-    comment_id = models.BigAutoField(primary_key=True)
+    comment_id = models.BigIntegerField(primary_key=True)
     comment_type = models.BigIntegerField(blank=True, null=True)
     role_id = models.BigIntegerField()
     submission_id = models.BigIntegerField()
@@ -1431,7 +1431,7 @@ class SubmissionComments(models.Model):
 
 
 class SubmissionFiles(models.Model):
-    file_id = models.BigAutoField(primary_key=True)
+    file_id = models.BigIntegerField(primary_key=True)
     revision = models.BigIntegerField(primary_key=True)
     source_file_id = models.BigIntegerField(blank=True, null=True)
     source_revision = models.BigIntegerField(blank=True, null=True)
@@ -1472,7 +1472,7 @@ class SubmissionFileSettings(models.Model):
 
 
 class SubmissionSearchKeywordList(models.Model):
-    keyword_id = models.BigAutoField(primary_key=True)
+    keyword_id = models.BigIntegerField(primary_key=True)
     keyword_text = models.CharField(unique=True, max_length=60)
 
     class Meta:
@@ -1492,7 +1492,7 @@ class SubmissionSearchObjectKeywords(models.Model):
 
 
 class SubmissionSearchObjects(models.Model):
-    object_id = models.BigAutoField(primary_key=True)
+    object_id = models.BigIntegerField(primary_key=True)
     submission_id = models.BigIntegerField()
     type = models.IntegerField()
     assoc_id = models.BigIntegerField(blank=True, null=True)
@@ -1513,7 +1513,7 @@ class SubmissionSupplementaryFiles(models.Model):
 
 
 class Submissions(models.Model):
-    submission_id = models.BigAutoField(primary_key=True)
+    submission_id = models.BigIntegerField(primary_key=True)
     locale = models.CharField(max_length=5, blank=True, null=True)
     context_id = models.BigIntegerField()
     series_id = models.BigIntegerField(blank=True, null=True)
@@ -1662,7 +1662,7 @@ class TUsageStatistics(models.Model):
 
 
 class TemporaryFiles(models.Model):
-    file_id = models.BigAutoField(primary_key=True)
+    file_id = models.BigIntegerField(primary_key=True)
     user_id = models.BigIntegerField()
     file_name = models.CharField(max_length=90)
     file_type = models.CharField(max_length=255, blank=True, null=True)
@@ -1717,7 +1717,7 @@ class UserGroupStage(models.Model):
 
 
 class UserGroups(models.Model):
-    user_group_id = models.BigAutoField(primary_key=True)
+    user_group_id = models.BigIntegerField(primary_key=True)
     context_id = models.BigIntegerField()
     role_id = models.BigIntegerField()
     is_default = models.IntegerField()
@@ -1767,7 +1767,7 @@ class UserUserGroups(models.Model):
 
 
 class Users(models.Model):
-    user_id = models.BigAutoField(primary_key=True)
+    user_id = models.BigIntegerField(primary_key=True)
     username = models.CharField(unique=True, max_length=32)
     password = models.CharField(max_length=255)
     salutation = models.CharField(max_length=40, blank=True, null=True)
