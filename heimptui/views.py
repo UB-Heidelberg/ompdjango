@@ -74,11 +74,11 @@ class OMPDAL:
 
     def getFileNameByFileID(self, file):
         if file:
-            return '{}-{}-{}-{}-{}-{}.{}'.format(file.submission_id, file.genre_id, file.file_id, file.revision, file.file_stage, file.date_uploaded.strftime('%Y%m%d'),
-             file.original_file_name.split(".")[-1])
-        else: return None
-
-
+            return '{}-{}-{}-{}-{}-{}.{}'.format(file.submission_id, file.genre_id, file.file_id, file.revision,
+                                                 file.file_stage, file.date_uploaded.strftime('%Y%m%d'),
+                                                 file.original_file_name.split(".")[-1])
+        else:
+            return None
 
 
 omp = OMPDAL()
@@ -109,8 +109,9 @@ def submissions(request, press_id):
         sl[s.submission_id]['title'] = title['setting_value'] if title else ''
     stage_assignments = {}
     for s in submissions_list:
-        stage_assignments[s.submission_id] = \
-            omp.getStageAssignments(s.submission_id).order_by('-date_assigned').values('user_id').first()['user_id']
+        sa = omp.getStageAssignments(s.submission_id).order_by('-date_assigned').values('user_id').first()
+        if sa:
+            stage_assignments[s.submission_id] = sa['user_id']
 
     for s in stage_assignments:
         u = Users.objects.filter(user_id=stage_assignments[s]).values('initials')
@@ -141,15 +142,15 @@ def workflow(request, press_id, submission_id, stage_id):
                                                    omp.getAuthorsByChapter(chapter.chapter_id)]
         pfs = [omp.getFileNameByFileID(
             omp.getLatestRevisionOfChapterFileByPublicationFormat(chapter_id, int(format_id[0]))) for
-               format_id in
-               omp.getAllPublicationFormatsBySubmission(submission_id=submission_id).values_list(
-                   'publication_format_id')]
+            format_id in
+            omp.getAllPublicationFormatsBySubmission(submission_id=submission_id).values_list(
+                'publication_format_id')]
         chapters[chapter_id]['files'] = pfs
 
-    context = {'chapters': chapters, 'formats': formats, 'press_title': '','press_id':press_id, 'submission_id':submission_id}
+    context = {'chapters': chapters, 'formats': formats, 'press_title': '', 'press_id': press_id,
+               'submission_id': submission_id}
 
     return render(request, 'workflow/index.html', context)
-
 
 
 def download(request, path):
