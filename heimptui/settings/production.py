@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'heimptui.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'omp1_2',
+        'NAME': 'omp3_1',
         'USER': 'heimpt_user',
         'PASSWORD': '?5xMhFQ-',
         'HOST': '127.0.0.1',

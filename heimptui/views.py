@@ -111,7 +111,7 @@ def submissions(request, press_id):
     for s in submissions_list:
         _sa = omp.getStageAssignments(s.submission_id).order_by('-date_assigned').values('user_id').first()
         if _sa:
-            sa[s.submission_id] = sa['user_id']
+            sa[s.submission_id] = sa.get('user_id')
 
     for s in sa:
         u = Users.objects.filter(user_id=sa[s]).values('initials')
