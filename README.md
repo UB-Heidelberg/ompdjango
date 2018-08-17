@@ -1,5 +1,7 @@
 # Installation
+
 ```bash
+sudo pip3 install -r requirements.txt
 cd $root
 npm init
 # link local omp folder

@@ -101,20 +101,20 @@ def detail(request, submission_id):
 def submissions(request, press_id):
     submissions_list = omp.getSubmissionsByPress(press_id, 1).order_by('last_modified')
 
-    sl = OrderedDict()
+    sa, sl = {}, OrderedDict()
     for s in submissions_list:
         sl[s.submission_id] = {'id': s.submission_id}
         title = SubmissionSettings.setting_by_name.get_queryset(setting_name='title', locale=locale).filter(
             submission_id=s.submission_id).values('setting_value').first()
         sl[s.submission_id]['title'] = title['setting_value'] if title else ''
-    stage_assignments = {}
-    for s in submissions_list:
-        sa = omp.getStageAssignments(s.submission_id).order_by('-date_assigned').values('user_id').first()
-        if sa:
-            stage_assignments[s.submission_id] = sa['user_id']
 
-    for s in stage_assignments:
-        u = Users.objects.filter(user_id=stage_assignments[s]).values('initials')
+    for s in submissions_list:
+        _sa = omp.getStageAssignments(s.submission_id).order_by('-date_assigned').values('user_id').first()
+        if _sa:
+            sa[s.submission_id] = sa['user_id']
+
+    for s in sa:
+        u = Users.objects.filter(user_id=sa[s]).values('initials')
         sl[s]['initials'] = u.first()['initials'] if u else ''
 
     context = {
