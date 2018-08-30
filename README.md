@@ -10,7 +10,7 @@ npm init
 ln -s /home/wit/software/web2py/applications/UBHD_OMPPortal/static/files/ static/files
 
 ```
- # heimpt cli
+# heimpt cli
  
  ```bash
  # /tools/heimpt
