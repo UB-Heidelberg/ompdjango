@@ -1,7 +1,7 @@
 # Introduction
 This is a sample application for mapping of OMP Database into the python django-model.a
 
-![][ompdjango.png]
+![](ompdjango.png)
 
 # Installation
 
