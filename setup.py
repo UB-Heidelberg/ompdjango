@@ -1,12 +1,12 @@
 
 from setuptools import setup, find_packages
-from heimptui import __version__
+from ompdjango import __version__
 
 setup(
-    name='heimptui',
+    name='ompdjango',
     version=__version__,
 
-    url='https://www.github.com/withanage/heimptui',
+    url='https://www.github.com/withanage/ompdjango',
     author='Dulip Withanage',
     author_email='dulip.withanage@gmail.com',
 

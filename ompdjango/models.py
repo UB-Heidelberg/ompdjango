@@ -826,9 +826,9 @@ class PluginSettings(models.Model):
 
 
 class PressSettings(models.Model):
-    press_id = models.BigIntegerField(primary_key=True)
-    locale = models.CharField(max_length=5, primary_key=True)
-    setting_name = models.CharField(max_length=255, primary_key=True)
+    press_id = models.BigIntegerField()
+    locale = models.CharField(max_length=5)
+    setting_name = models.CharField(max_length=255)
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
@@ -877,9 +877,9 @@ class PublicationDates(models.Model):
 
 
 class PublicationFormatSettings(models.Model):
-    publication_format_id = models.BigIntegerField(primary_key=True)
-    locale = models.CharField(max_length=5, primary_key=True)
-    setting_name = models.CharField(max_length=255, primary_key=True)
+    publication_format_id = models.BigIntegerField()
+    locale = models.CharField(max_length=5, )
+    setting_name = models.CharField(max_length=255, )
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
@@ -892,7 +892,7 @@ class PublicationFormatSettings(models.Model):
 
 
 class PublicationFormats(models.Model):
-    publication_format_id = models.BigIntegerField(primary_key=True)
+    publication_format_id = models.BigIntegerField()
     submission_id = models.BigIntegerField()
     physical_format = models.IntegerField(blank=True, null=True)
     entry_key = models.CharField(max_length=64, blank=True, null=True)
@@ -1431,8 +1431,8 @@ class SubmissionComments(models.Model):
 
 
 class SubmissionFiles(models.Model):
-    file_id = models.BigIntegerField(primary_key=True)
-    revision = models.BigIntegerField(primary_key=True)
+    file_id = models.BigIntegerField()
+    revision = models.BigIntegerField()
     source_file_id = models.BigIntegerField(blank=True, null=True)
     source_revision = models.BigIntegerField(blank=True, null=True)
     submission_id = models.BigIntegerField()
@@ -1458,10 +1458,10 @@ class SubmissionFiles(models.Model):
 
 
 class SubmissionFileSettings(models.Model):
-    file_id = models.BigIntegerField(primary_key=True)
-    #file_id = models.ForeignKey(SubmissionFiles, on_delete=False, related_name='file_id+', primary_key=True)
-    locale = models.CharField(max_length=5, primary_key=True)
-    setting_name = models.CharField(max_length=255, primary_key=True)
+    file_id = models.BigIntegerField()
+    #file_id = models.ForeignKey(SubmissionFiles, on_delete=False, related_name='file_id+', )
+    locale = models.CharField(max_length=5, )
+    setting_name = models.CharField(max_length=255, )
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
@@ -1538,9 +1538,9 @@ class Submissions(models.Model):
 
 
 class SubmissionSettings(models.Model):
-    submission_id = models.BigIntegerField(primary_key=True)
-    locale = models.CharField(max_length=5, primary_key=True)
-    setting_name = models.CharField(max_length=255, primary_key=True)
+    submission_id = models.BigIntegerField()
+    locale = models.CharField(max_length=5, )
+    setting_name = models.CharField(max_length=255, )
     setting_value = models.TextField(blank=True, null=True)
     setting_type = models.CharField(max_length=6)
 
@@ -1740,9 +1740,9 @@ class UserInterests(models.Model):
 
 
 class UserSettings(models.Model):
-    user_id = models.BigIntegerField(primary_key=True)
-    locale = models.CharField(max_length=5, primary_key=True)
-    setting_name = models.CharField(max_length=255, primary_key=True)
+    user_id = models.BigIntegerField()
+    locale = models.CharField(max_length=5, )
+    setting_name = models.CharField(max_length=255, )
     assoc_type = models.BigIntegerField(blank=True, null=True)
     assoc_id = models.BigIntegerField(blank=True, null=True)
     setting_value = models.TextField(blank=True, null=True)

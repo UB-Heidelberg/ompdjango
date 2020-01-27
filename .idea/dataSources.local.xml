@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="dataSourceStorageLocal">
-    <data-source name="Django default" uuid="f7c831d5-3c88-47a9-982c-0b2fbba83972">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
-      <introspection-schemas>*:omp1_2</introspection-schemas>
-    </data-source>
-  </component>
-</project>
