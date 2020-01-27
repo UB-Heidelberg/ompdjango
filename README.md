@@ -2,7 +2,7 @@
 
 Sample application for mapping of OMP Database into the python django-model.
 This can be  used to  access the  OMP database using python django model.
-
+Please see the [models.py](ompdjango/models.py) for mapping.
 
 ![](ompdjango.png)
 
